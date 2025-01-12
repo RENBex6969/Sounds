@@ -3,11 +3,15 @@ local NoTamper = {
   ["hf"] = clonefunction(hookfunction),
   ["wf"] = clonefunction(writefile),
   ["rf"] = clonefunction(readfile),
+  ["mf"] = clonefunction(makefolder),
   ["NoReadFile"] = {
     ""
   }
   ["NoWriteFile"] = {
     ""
+  },
+  ["NoDelFolder"] = {
+    
   }
 }
 
@@ -17,6 +21,9 @@ local NT = {
   end,
   ["addNoWrite"] = function(path)
     table.insert(NoTamper.NoWriteFile, path)
+  end
+  ["addDelFolder"] = function(path)
+    table.insert(NoTamper.NoDelFolder, path)
   end
 }
 
@@ -31,6 +38,15 @@ end
 
 local function isNoWriteTamper(path)
   for _, value in ipairs(NoTamper.NoWriteFile) do
+    if value == path then
+      return true
+    end
+  end
+  return false
+end
+
+local function isNoDelFolder(path)
+  for _, value in ipairs(NoTamper.NoDelFolder) do
     if value == path then
       return true
     end
@@ -62,6 +78,14 @@ hf2 = NoTamper.hf(writefile, newcclosure(function(path, data)
     end
   end
   return hf2(path, data)
+end))
+
+hf3 = NoTamper.hf(delfolder, newcclosure(function(path)
+  if isNoDelFolder(path) == true then
+    NoTamper.mf("blank")
+    return hf3("blank")
+  end
+  return hf3(path)
 end))
 
 return NT
