@@ -21,7 +21,7 @@ local NT = {
   end,
   ["addNoWrite"] = function(path)
     table.insert(NoTamper.NoWriteFile, path)
-  end
+  end,
   ["addDelFolder"] = function(path)
     table.insert(NoTamper.NoDelFolder, path)
   end
