@@ -15,17 +15,18 @@ local NoTamper = {
   }
 }
 
-local NT = {
-  ["addNoRead"] = function(path)
-    table.insert(NoTamper.NoReadFile, path)
-  end,
-  ["addNoWrite"] = function(path)
-    table.insert(NoTamper.NoWriteFile, path)
-  end,
-  ["addDelFolder"] = function(path)
-    table.insert(NoTamper.NoDelFolder, path)
-  end
-}
+local NT = {}
+
+NT.addNoRead = function(path)
+  table.insert(NoTamper.NoReadFile, path)
+end
+NT.addNoWrite= function(path)
+  table.insert(NoTamper.NoWriteFile, path)
+end
+NT.addDelFolder = function(path)
+  table.insert(NoTamper.NoDelFolder, path)
+end
+
 
 local function isNoReadTamper(path)
   for _, value in ipairs(NoTamper.NoReadFile) do
@@ -88,3 +89,4 @@ hf3 = NoTamper.hf(delfolder, newcclosure(function(path)
   return hf3(path)
 end))
 
+return NT
