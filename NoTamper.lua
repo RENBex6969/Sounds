@@ -15,7 +15,7 @@ local NoTamper = {
   }
 }
 
-local NT = {}
+NT = {}
 
 NT.addNoRead = function(path)
   table.insert(NoTamper.NoReadFile, path)
