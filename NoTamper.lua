@@ -6,7 +6,7 @@ local NoTamper = {
   ["mf"] = clonefunction(makefolder),
   ["NoReadFile"] = {
     ""
-  }
+  },
   ["NoWriteFile"] = {
     ""
   },
@@ -88,4 +88,3 @@ hf3 = NoTamper.hf(delfolder, newcclosure(function(path)
   return hf3(path)
 end))
 
-return NT
